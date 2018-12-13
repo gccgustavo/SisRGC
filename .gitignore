@@ -1,0 +1,4 @@
+venvSisRGC/
+*.idea
+*pyc
+*.sqlite3
