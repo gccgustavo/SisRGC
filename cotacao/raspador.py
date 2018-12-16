@@ -51,4 +51,9 @@ for item in pages:
     i = i + 1
     if i == 1:
         break
-print(listacotacoes)
+saida = str(listacotacoes[0][7]).split(':')
+saida = str(saida[1]).replace('</b>','').replace('.','').replace('</td>','')
+
+
+# saida = str(listacotacoes[0][3]).replace(':','').replace('Objeto','').replace('/','').replace('<','').replace('>','').replace('td','').replace('b b','')
+print(saida)

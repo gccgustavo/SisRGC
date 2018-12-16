@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Cotação Eletronica {% endblock %}
+
+{% block main %}
+
+    <h1>COTAÇÃO ELETRONICA</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Número</th>
+                <th scope="col">Objeto</th>
+                <th scope="col">Data de Encerramento</th>
+                <th scope="col">Hora de Encerramento</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cotacao in object_list %}
+
+                <tr>
+                    <th scope="row">{{cotacao.numero}}</th>
+                    <td>{{cotacao.objeto}}</td>
+                    <td>{{cotacao.data_encerramento}}</td>
+                    <td>{{cotacao.hora_encerramento}}</td>
+                </tr>
+        {% endfor%}
+        </tbody>
+
+    </table>
+
+{% endblock %}

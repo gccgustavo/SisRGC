@@ -14,14 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from cotacao import urls as cotacao_urls
-from django.conf import settings
-from django.conf.urls.static import static
-from django.contrib.auth import views as auth_views
+from django.urls import path
+
+from django.views.generic.base import TemplateView
+from .views import CotacaoPageView, CotacaoListView
+from .views import CotacaoPageView, CotacaoListView, CotacaoDatailView, Raspador
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('cotacao/',include(cotacao_urls))
+    # path('', CotacaoPageView.as_view()),
+    path('', CotacaoListView.as_view()),
+    path('raspador', Raspador.as_view()),
+    path('<int:pk>', CotacaoDatailView.as_view()),
+
 ]
