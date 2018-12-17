@@ -63,6 +63,7 @@ class Raspador(View):
 
             detalhe_list_item = detalhe_list.find_all('tr')
             # print(item)
+            lista.append(item)
             for tr in detalhe_list_item[1:]:
                 lista.append(tr.find('td'))
                 #
@@ -71,23 +72,24 @@ class Raspador(View):
                 # print(lista)
             listacotacoes.append(lista)
             lista = []
-
+            #
             # i = i + 1
-            # if i == 10:
+            # if i == 1:
             #     break
 
         for linha in range(0,len(listacotacoes)):
             #Tratamento dos dados para inserir no banco
-            uasg = str(listacotacoes[linha][0]).replace('/', '').replace('<', '').replace('>', '').replace('td', '')
-            numero = str(listacotacoes[linha][1]).replace('/', '').replace('<', '').replace('>', '').replace('td', '')
-            objeto = str(listacotacoes[linha][2]).replace(':','').replace('Objeto','').replace('/','').replace('<','').replace('>','').replace('td','').replace('b b','')
-            auxdata = str(listacotacoes[linha][3]).split(':')
+            link = str(listacotacoes[linha][0])
+            uasg = str(listacotacoes[linha][1]).replace('/', '').replace('<', '').replace('>', '').replace('td', '')
+            numero = str(listacotacoes[linha][2]).replace('/', '').replace('<', '').replace('>', '').replace('td', '')
+            objeto = str(listacotacoes[linha][3]).replace(':','').replace('Objeto','').replace('/','').replace('<','').replace('>','').replace('td','').replace('b b','')
+            auxdata = str(listacotacoes[linha][4]).split(':')
             data_abertura = str(auxdata[1]).replace('</b>','').replace('</td>','')
-            observacoes = str(listacotacoes[linha][4]).replace('/', '').replace('<', '').replace('>', '').replace('td', '')
-            situacao = str(listacotacoes[linha][5]).replace('/', '').replace('<', '').replace('>', '').replace('td', '')
+            observacoes = str(listacotacoes[linha][5]).replace('/', '').replace('<', '').replace('>', '').replace('td', '')
+            situacao = str(listacotacoes[linha][6]).replace('/', '').replace('<', '').replace('>', '').replace('td', '')
 
             #tratamento da data e hora de encerramento
-            saida = str(listacotacoes[linha][6]).split(':')
+            saida = str(listacotacoes[linha][7]).split(':')
             saida = str(saida[1]).replace('</b>', '').split(' ')
             data = saida[1]
             hora = saida[2].replace('<span', '')
@@ -95,7 +97,7 @@ class Raspador(View):
             data_encerramento = data
             hora_encerramento = hora
 
-            valorm = str(listacotacoes[linha][7]).split(':')
+            valorm = str(listacotacoes[linha][8]).split(':')
             valor_maximo = str(valorm[1]).replace('</b>', '').replace('.', '').replace('</td>', '')
 
             #inserindo no banco
@@ -103,7 +105,7 @@ class Raspador(View):
                 uasg=uasg,
                 numero=numero,
                 objeto = objeto,
-                # # link =listacotacoes[0][3],
+                link =link,
                 data_abertura =data_abertura,
                 observacoes =observacoes,
                 situacao =situacao,
@@ -112,4 +114,4 @@ class Raspador(View):
                 valor_maximo = valor_maximo
             )
 
-        return redirect(CotacaoListView)
+        return redirect("listagem")

@@ -23,7 +23,7 @@ from .views import CotacaoPageView, CotacaoListView, CotacaoDatailView, Raspador
 
 urlpatterns = [
     # path('', CotacaoPageView.as_view()),
-    path('', CotacaoListView.as_view()),
+    path('', CotacaoListView.as_view(), name="listagem"),
     path('raspador', Raspador.as_view()),
     path('<int:pk>', CotacaoDatailView.as_view()),
 
