@@ -70,7 +70,7 @@ class Raspador(View):
                 )
 
             tt = tt + 1
-            if tt == 50:
+            if tt == 100:
                 break
             # print(link,numero, descricao)
         i = 0
