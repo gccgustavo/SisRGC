@@ -1,1 +1,1 @@
-web: gunicorn sisrgc.wsgi --log-file -
+web: gunicorn SisRGC.wsgi --log-file -
