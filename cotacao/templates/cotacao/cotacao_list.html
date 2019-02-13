@@ -4,30 +4,33 @@
 
 {% block main %}
 
-    <h1>COTAÇÃO ELETRONICA</h1>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Número</th>
-                <th scope="col">Objeto</th>
-                <th scope="col">Data de Encerramento</th>
-                <th scope="col">Hora de Encerramento</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for cotacao in object_list %}
+    <div class="container">
+        <h1 class="text-center">COTAÇÃO ELETRÔNICA</h1>
 
+        <table class="table table-striped ">
+            <thead class="thead-dark">
                 <tr>
-                    <th scope="row">{{cotacao.numero}}</th>
-                    <td><a href= {{cotacao.link}}  >{{cotacao.objeto}}</a></td>
-                    <td>{{cotacao.data_encerramento}}</td>
-                    <td>{{cotacao.hora_encerramento}}</td>
-                    <td>{{cotacao.exibir}}</td>
+                    <th scope="col">Número</th>
+                    <th scope="col">Objeto</th>
+                    <th scope="col">Data de Encerramento</th>
+                    <th scope="col">Hora de Encerramento</th>
                 </tr>
-        {% endfor%}
-        </tbody>
+            </thead>
+            <tbody>
+            {% for cotacao in object_list %}
+                {% if cotacao.exibir == True %}
 
-    </table>
+                    <tr>
+                        <th scope="row">{{cotacao.numero}}</th>
+                        <td class="text-justify"><a href= {{cotacao.link}}  >{{cotacao.objeto}}</a></td>
+                        <td>{{cotacao.data_encerramento}}</td>
+                        <td>{{cotacao.hora_encerramento}}</td>
+                     </tr>
+                {% endif %}
+            {% endfor%}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}
