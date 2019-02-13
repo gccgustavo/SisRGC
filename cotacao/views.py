@@ -69,9 +69,9 @@ class Raspador(View):
                 linkpp=link
                 )
 
-            tt = tt + 1
-            if tt == 100:
-                break
+            # tt = tt + 1
+            # if tt == 100:
+            #     break
             # print(link,numero, descricao)
         i = 0
         lista = []
