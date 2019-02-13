@@ -2,7 +2,7 @@ import requests, csv
 from bs4 import BeautifulSoup
 
 #todo melhorar a lógica do scraping e comentar o código
-# coletando a primeira página da lista de artistas
+# coletando a primeira página da lista de cotacoes
 
 page = requests.get('http://comprasnet.gov.br/cotacao/menu.asp?filtro=livre_andamento')
 soup = BeautifulSoup(page.text,'html.parser')

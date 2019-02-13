@@ -11,6 +11,14 @@ class Cotacao(models.Model):
     data_encerramento = models.TextField()
     hora_encerramento = models.TextField()
     valor_maximo = models.TextField()
+    exibir = models.BooleanField()
 
     def __str__(self):
         return self.numero + ' ' + self.objeto
+
+#classe para gravar os links da paginia principal das cotacoes
+class ListaPP(models.Model):
+    linkpp = models.TextField()
+
+    def __str__(self):
+        return self.linkpp
