@@ -1,45 +1,11 @@
-from django.shortcuts import render
-from django.views.generic.base import TemplateView
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
-from .models import Cotacao, ListaPP
-from django.http import HttpResponse
-from django.views import View
-#imports para a autenticcacao
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-#imports para o raspador
-import requests, csv
+from django.core.management.base import BaseCommand
 from bs4 import BeautifulSoup
+from cotacao.models import Cotacao, ListaPP
 from django.shortcuts import redirect
+import requests, csv
 
-
-
-
-
-@method_decorator(login_required, name='dispatch')
-class CotacaoPageView(TemplateView):
-    template_name = 'cotacao.html'
-
-@method_decorator(login_required, name='dispatch')
-class CotacaoListView(ListView):
-    model = Cotacao
-    # ordering = ['data_encerramento']
-    def get_queryset(self):
-        return Cotacao.objects.order_by('data_encerramento','hora_encerramento')
-    #posso definir o templatename para qualquer um mas se naão definir
-    #por padrão ele busca na pasta templates/nomeapp ou seja nesse
-    #caso na pasta template/cotacao o arquivo com msm nome tmb
-    #ou seja cotacao_list.html
-    #envia para o template os objtos em object_list
-
-@method_decorator(login_required, name='dispatch')
-class CotacaoDatailView(DetailView):
-    model = Cotacao
-
-@method_decorator(login_required, name='dispatch')
-class Raspador(View):
-    def get(self, request, *args, **kwargs):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         page = requests.get('http://comprasnet.gov.br/cotacao/menu.asp?filtro=livre_andamento')
         soup = BeautifulSoup(page.text, 'html.parser')
 
@@ -150,6 +116,4 @@ class Raspador(View):
                 mostrar.exibir = False
                 mostrar.save()
 
-
-
-        return redirect("listagem")
+        return 0
