@@ -11,7 +11,7 @@ from django.utils.decorators import method_decorator
 #imports para o raspador
 import requests, csv
 from bs4 import BeautifulSoup
-from django.shortcuts import redirect
+# from django.shortcuts import redirect
 
 
 
