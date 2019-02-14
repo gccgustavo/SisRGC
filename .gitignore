@@ -3,3 +3,4 @@ venvSisRGC/
 *pyc
 *.sqlite3
 .env
+BancoHeroku
